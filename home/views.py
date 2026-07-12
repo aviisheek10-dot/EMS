@@ -147,7 +147,7 @@ def cancel_seat(request, event_id):
     return redirect('event_detail', event_id=event.id)
 
 def my_bookings(request):
-    bookings = Bookings.objects.filter(participant=request.user)
+    bookings = Bookings.objects.filter(participants=request.user)
     context = {'bookings': bookings}
     return render(request, 'my_bookings.html', context)
 
