@@ -76,7 +76,7 @@ def join_event(request, event_id):
     if request.method != 'POST':
         return redirect('event_detail', event_id=event_id)
     already_joined = Bookings.objects.filter(
-        event=event, participant=request.user
+        event=event, participants=request.user
     ).exists()
 
     if already_joined:
