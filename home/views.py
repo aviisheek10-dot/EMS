@@ -48,7 +48,7 @@ def event_list(request):
 
 def event_detail(request, event_id):
     event = get_object_or_404(Event, pk=event_id)
-    bookings = event.bookings.select_related('participant').order_by('booked_at')
+    bookings = event.bookings.select_related('participants').order_by('booked_at')
     user_has_joined = False
     my_seat_index = -1
     if request.user.is_authenticated:
