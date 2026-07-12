@@ -84,7 +84,7 @@ def join_event(request, event_id):
     elif event.seats <= 0:
         messages.error(request, "Sorry, this event is full.")
     else:
-        Bookings.objects.create(event=event, participant=request.user)
+        Bookings.objects.create(event=event, participants=request.user)
         messages.success(request, f"You're in! Seat reserved for {event.name}.")
 
         if request.user.email:
@@ -136,7 +136,7 @@ def cancel_event(request, event_id):
 
 def cancel_seat(request, event_id):
     event = get_object_or_404(Event, id=event_id)
-    booking = Bookings.objects.filter(event=event, participant=request.user).first()
+    booking = Bookings.objects.filter(event=event, participants=request.user).first()
 
     if booking:
         booking.delete()
